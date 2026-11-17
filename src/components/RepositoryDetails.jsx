@@ -1,5 +1,5 @@
 import { View, StyleSheet, Pressable, Linking, ScrollView } from 'react-native';
-import { useParams } from 'react-router-native';
+import { useParams, useHistory } from 'react-router-native';
 import { useQuery } from '@apollo/client';
 import { GET_REPOSITORY } from '../graphql/queries';
 import RepositoryItem from './RepositoryItem';
@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
 
 const RepositoryDetails = () => {
   const { id } = useParams();
+  const history = useHistory();
   const { data, loading } = useQuery(GET_REPOSITORY, {
     variables: { id },
     fetchPolicy: 'cache-and-network',
@@ -55,8 +56,14 @@ const RepositoryDetails = () => {
         >
           <Text style={styles.buttonText}>Open in GitHub</Text>
         </Pressable>
+        <Pressable
+          style={styles.button}
+          onPress={() => history.push('/review')}
+        >
+          <Text style={styles.buttonText}>Create a review</Text>
+        </Pressable>
       </View>
-      
+
       <View style={{ paddingHorizontal: 15 }}>
         <Text style={styles.sectionTitle}>Reviews</Text>
         {reviews.length === 0 ? (

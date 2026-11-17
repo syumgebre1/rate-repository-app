@@ -1,6 +1,7 @@
 import { TextInput, Pressable, StyleSheet, View } from 'react-native';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import { useHistory } from 'react-router-native';
 import Text from './Text';
 import theme from '../theme';
 import useSignIn from '../hooks/useSignIn';
@@ -91,11 +92,13 @@ export const SignInContainer = ({ onSubmit }) => {
 
 const SignIn = () => {
   const [signIn] = useSignIn();
+  const history = useHistory();
 
   const onSubmit = async (values) => {
     try {
       const data = await signIn(values);
       console.log('Sign in successful:', data);
+      history.push('/'); // Redirect to repositories list
     } catch (e) {
       console.error('Sign in failed:', e.message);
     }
