@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { Route, Switch, Redirect } from 'react-router-native';
 import AppBar from './AppBar';
 import RepositoryList from './RepositoryList';
 import SignIn from './SignIn';
@@ -12,12 +12,14 @@ const styles = StyleSheet.create({
 });
 
 const Main = () => {
-  const [showSignIn, setShowSignIn] = useState(false);
-
   return (
     <View style={styles.container}>
-      <AppBar showSignIn={showSignIn} setShowSignIn={setShowSignIn} />
-      {showSignIn ? <SignIn /> : <RepositoryList />}
+      <AppBar />
+      <Switch>
+        <Route path="/signin" component={SignIn} />
+        <Route path="/" component={RepositoryList} />
+        <Redirect to="/" />
+      </Switch>
     </View>
   );
 };
