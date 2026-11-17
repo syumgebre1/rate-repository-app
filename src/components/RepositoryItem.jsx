@@ -1,4 +1,5 @@
-import { View, Image, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet, Pressable } from 'react-native';
+import { useHistory } from 'react-router-native';
 import Text from './Text';
 import theme from '../theme';
 
@@ -59,44 +60,48 @@ const styles = StyleSheet.create({
 
 const formatCount = (count) => {
   if (count >= 1000) {
-    return (count / 1000).toFixed(1) + 'k';
+    return `${(count / 1000).toFixed(1)}k`;
   }
   return count;
 };
 
 const RepositoryItem = ({ item }) => {
+  const history = useHistory();
+
   return (
-    <View style={styles.container}>
-      <View style={styles.topRow}>
-        <Image style={styles.avatar} source={{ uri: item.ownerAvatarUrl }} />
-        <View style={styles.infoContainer}>
-          <Text style={styles.fullName}>{item.fullName}</Text>
-          <Text color='textSecondary'>{item.description}</Text>
-          <View style={styles.languageTag}>
-            <Text style={styles.languageText}>{item.language}</Text>
+    <Pressable onPress={() => history.push(`/repository/${item.id}`)}>
+      <View style={styles.container}>
+        <View style={styles.topRow}>
+          <Image style={styles.avatar} source={{ uri: item.ownerAvatarUrl }} />
+          <View style={styles.infoContainer}>
+            <Text style={styles.fullName}>{item.fullName}</Text>
+            <Text color="textSecondary">{item.description}</Text>
+            <View style={styles.languageTag}>
+              <Text style={styles.languageText}>{item.language}</Text>
+            </View>
+          </View>
+        </View>
+
+        <View style={styles.statsRow}>
+          <View style={styles.statItem}>
+            <Text style={styles.statValue}>{formatCount(item.stargazersCount)}</Text>
+            <Text style={styles.statLabel}>Stars</Text>
+          </View>
+          <View style={styles.statItem}>
+            <Text style={styles.statValue}>{formatCount(item.forksCount)}</Text>
+            <Text style={styles.statLabel}>Forks</Text>
+          </View>
+          <View style={styles.statItem}>
+            <Text style={styles.statValue}>{item.reviewCount}</Text>
+            <Text style={styles.statLabel}>Reviews</Text>
+          </View>
+          <View style={styles.statItem}>
+            <Text style={styles.statValue}>{item.ratingAverage}</Text>
+            <Text style={styles.statLabel}>Rating</Text>
           </View>
         </View>
       </View>
-
-      <View style={styles.statsRow}>
-        <View style={styles.statItem}>
-          <Text style={styles.statValue}>{formatCount(item.stargazersCount)}</Text>
-          <Text style={styles.statLabel}>Stars</Text>
-        </View>
-        <View style={styles.statItem}>
-          <Text style={styles.statValue}>{formatCount(item.forksCount)}</Text>
-          <Text style={styles.statLabel}>Forks</Text>
-        </View>
-        <View style={styles.statItem}>
-          <Text style={styles.statValue}>{item.reviewCount}</Text>
-          <Text style={styles.statLabel}>Reviews</Text>
-        </View>
-        <View style={styles.statItem}>
-          <Text style={styles.statValue}>{item.ratingAverage}</Text>
-          <Text style={styles.statLabel}>Rating</Text>
-        </View>
-      </View>
-    </View>
+    </Pressable>
   );
 };
 
