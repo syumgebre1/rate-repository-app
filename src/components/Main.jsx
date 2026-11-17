@@ -5,12 +5,10 @@ import RepositoryList from './RepositoryList';
 import SignIn from './SignIn';
 import RepositoryDetails from './RepositoryDetails';
 import ReviewForm from './ReviewForm';
+import MyReviews from './MyReviews';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#e1e4e8',
-  },
+  container: { flex: 1, backgroundColor: '#e1e4e8' },
 });
 
 const Main = () => {
@@ -20,6 +18,7 @@ const Main = () => {
       <Switch>
         <Route path="/repository/:id" component={RepositoryDetails} />
         <Route path="/review" component={ReviewForm} />
+        <Route path="/myreviews" component={MyReviews} />
         <Route path="/signin" component={SignIn} />
         <Route path="/" component={RepositoryList} />
         <Redirect to="/" />
