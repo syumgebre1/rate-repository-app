@@ -10,20 +10,22 @@
     "lint": "expo lint"
   },
   "dependencies": {
+    "@apollo/client": "^4.3.8",
     "@expo/metro-runtime": "~55.0.12",
     "expo": "~55.0.32",
     "expo-constants": "~55.0.17",
     "expo-status-bar": "~55.0.6",
     "formik": "^2.4.9",
+    "graphql": "^16.15.0",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "react-native": "0.83.10",
     "react-native-web": "^0.21.0",
-    "react-router-native": "^6.30.6",
     "yup": "^1.7.1"
   },
   "private": true,
   "devDependencies": {
+    "babel-preset-expo": "~55.0.8",
     "eslint": "^9.39.5",
     "eslint-config-expo": "~55.0.1"
   }
