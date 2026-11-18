@@ -1,8 +1,11 @@
 import { TextInput, Pressable, StyleSheet, View } from 'react-native';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import { useHistory } from '../utils/router';
+// Remove: import { useHistory } from 'react-router-native';
 import Text from './Text';
 import theme from '../theme';
+import useSignIn from '../hooks/useSignIn';
 
 const styles = StyleSheet.create({
   container: {
@@ -40,16 +43,14 @@ const validationSchema = yup.object().shape({
   password: yup.string().required('Password is required'),
 });
 
-const SignIn = () => {
+export const SignInContainer = ({ onSubmit }) => {
   const formik = useFormik({
     initialValues: {
       username: '',
       password: '',
     },
     validationSchema,
-    onSubmit: (values) => {
-      console.log(values);
-    },
+    onSubmit,
   });
 
   return (
@@ -88,6 +89,23 @@ const SignIn = () => {
       </Pressable>
     </View>
   );
+};
+
+const SignIn = () => {
+  const [signIn] = useSignIn();
+  const history = useHistory();
+
+  const onSubmit = async (values) => {
+    try {
+      const data = await signIn(values);
+      console.log('Sign in successful:', data);
+      history.push('/'); // Redirect to repositories list
+    } catch (e) {
+      console.error('Sign in failed:', e.message);
+    }
+  };
+
+  return <SignInContainer onSubmit={onSubmit} />;
 };
 
 export default SignIn;
