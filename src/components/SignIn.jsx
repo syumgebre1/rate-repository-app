@@ -1,7 +1,8 @@
 import { TextInput, Pressable, StyleSheet, View } from 'react-native';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { useHistory } from 'react-router-native';
+import { useHistory } from '../utils/router';
+// Remove: import { useHistory } from 'react-router-native';
 import Text from './Text';
 import theme from '../theme';
 import useSignIn from '../hooks/useSignIn';

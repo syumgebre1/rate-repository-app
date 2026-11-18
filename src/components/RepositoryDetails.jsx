@@ -1,5 +1,6 @@
 import { View, StyleSheet, Pressable, Linking, ScrollView } from 'react-native';
-import { useParams, useHistory } from 'react-router-native';
+import { useParams, useHistory } from '../utils/router';
+// Remove: import { useParams, useHistory } from 'react-router-native';
 import { useQuery } from '@apollo/client';
 import { GET_REPOSITORY } from '../graphql/queries';
 import RepositoryItem from './RepositoryItem';

@@ -63,6 +63,20 @@ export const ME = gql`
     me {
       id
       username
+      reviews {
+        edges {
+          node {
+            id
+            text
+            rating
+            createdAt
+            repository {
+              id
+              fullName
+            }
+          }
+        }
+      }
     }
   }
 `;

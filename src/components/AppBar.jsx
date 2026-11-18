@@ -1,6 +1,7 @@
 import { View, StyleSheet, ScrollView, Pressable } from 'react-native';
 import Constants from 'expo-constants';
-import { Link, useHistory } from 'react-router-native';
+import { Link, useHistory } from '../utils/router';
+// Remove: import { Link, useHistory } from 'react-router-native';
 import { useQuery } from '@apollo/client';
 import { ME } from '../graphql/queries';
 import Text from './Text';
